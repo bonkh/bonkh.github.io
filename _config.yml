@@ -1,0 +1,14 @@
+title: My blog
+email: caokhoi20092003@gmail.com
+description: >- 
+   A blog about Data Science and Origami
+baseurl: ""
+url: "https://bonkh.github.io/"
+twitter_username: khoihuynh19
+github_username:  bonkh
+
+
+theme: minima
+
+plugins:
+  - jekyll-feed

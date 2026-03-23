@@ -1,0 +1,17 @@
+<header class="site-header" role="banner">
+
+  <div class="wrapper header-wrapper">
+    
+    <!-- Blog name on the left -->
+    <a class="site-title" href="/">{{ site.title }}</a>
+
+    <!-- Navigation on the right -->
+    <nav class="site-nav">
+      <a href="/data-science" {% if page.url contains 'data-science' %}class="active"{% endif %}>Data Science</a>
+      <a href="/origami" {% if page.url contains 'origami' %}class="active"{% endif %}>Origami</a>
+      <a href="/about" {% if page.url contains 'about' %}class="active"{% endif %}>About</a>
+    </nav>
+
+  </div>
+
+</header>
