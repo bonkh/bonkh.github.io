@@ -4,3 +4,6 @@ _site
 .jekyll-metadata
 vendor
 vendor/
+_site/
+.jekyll-cache/
+vendor/
