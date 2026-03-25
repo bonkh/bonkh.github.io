@@ -1,11 +1,14 @@
 title: My blog
+author: Huynh Cao Khoi
 email: caokhoi20092003@gmail.com
+location: "Ho Chi Minh City, Vietnam"
 description: >- 
    A blog about Data Science and Origami
 baseurl: ""
 url: "https://bonkh.github.io/"
 twitter_username: khoihuynh19
-github_username:  bonkh
+github_username:  bonkh 
+instagram_username: ckhoi20
 
 
 theme: minima

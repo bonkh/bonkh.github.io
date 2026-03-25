@@ -5,6 +5,9 @@ title: Data Science
 
 <div class="category-page">
   <h2>Origami blog</h2>
+  <p class="category-description">
+    Some stories about my Origami Journey
+  </p>
   <ul class="post-list">
     {% for post in site.posts %}
       {% if post.category == "origami" %}

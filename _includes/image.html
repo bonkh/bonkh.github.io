@@ -1,0 +1,9 @@
+<figure class="post-figure {{ include.class }}">
+  <img 
+    src="{{ include.src }}" 
+    alt="{{ include.caption }}"
+    style="width: {{ include.width | default: '100%' }};"
+  >
+<figcaption>{{ include.caption | markdownify | remove: '<p>' | remove: '</p>' }}</figcaption>
+
+</figure>

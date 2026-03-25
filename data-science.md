@@ -4,7 +4,11 @@ title: Data Science
 ---
 
 <div class="category-page">
-  <h2>Data Science Projects</h2>
+  <h2>Data Science Projects & Blogs</h2>
+  <p class="category-description">
+    A collection of my Data Science projects and writings, covering topics such as 
+    machine learning, deep learning, causal inference, and data analysis.
+  </p>
   <ul class="post-list">
     {% for post in site.posts %}
       {% if post.category == "data-science" %}

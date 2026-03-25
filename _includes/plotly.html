@@ -1,0 +1,11 @@
+<figure class="post-figure {{ include.class }}">
+  <iframe
+    src="{{ include.src }}"
+    width="{{ include.width | default: '100%' }}"
+    height="{{ include.height | default: '500px' }}"
+    frameborder="0"
+    scrolling="no">
+  </iframe>
+  <figcaption>{{ include.caption | markdownify | remove: '<p>' | remove: '</p>' }}</figcaption>
+</figure>
+ 

@@ -1,0 +1,28 @@
+<div class="slider-container">
+  <div class="slider" id="{{ include.id }}">
+    {% assign images = include.images | split: "," %}
+    {% assign captions = include.captions | split: "," %}
+    {% for image in images %}
+      {% assign src = image | strip %}
+      <div class="slide">
+        {% if src contains '.html' %}
+          <iframe
+            src="{{ src }}"
+            width="{{ include.width | default: '100%' }}"
+            height="{{ include.height | default: '500px' }}"
+            frameborder="0"
+            scrolling="no">
+          </iframe>
+        {% else %}
+          <img src="{{ src }}" alt="{{ captions[forloop.index0] | strip }}">
+        {% endif %}
+        <figcaption>{{ captions[forloop.index0] | strip }}</figcaption>
+      </div>
+    {% endfor %}
+  </div>
+
+  <button class="slider-btn prev" onclick="moveSlide('{{ include.id }}', -1)">&#8592;</button>
+  <button class="slider-btn next" onclick="moveSlide('{{ include.id }}', 1)">&#8594;</button>
+
+  <div class="slider-dots" id="{{ include.id }}-dots"></div>
+</div>
