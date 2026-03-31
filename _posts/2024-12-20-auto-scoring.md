@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Kaggle Competition: Learning Agency Lab - Automated Essay Scoring 2.0"
-date: 2024-12S-20
+date: 2024-12-20
 category: data-science 
 ---
 *Our team developed a machine learning model to automatically score essays based on the Holistic Scoring Rubric.*
