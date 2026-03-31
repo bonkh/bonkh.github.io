@@ -1,14 +1,12 @@
 ---
 layout: post
 title: "Kaggle Competition: Learning Agency Lab - Automated Essay Scoring 2.0"
-date: 2025-03-22
+date: 2024-12S-20
 category: data-science 
 ---
-Learning how to score an essay with Machine Learning Model based on it structural pattern.
+*Our team developed a machine learning model to automatically score essays based on the Holistic Scoring Rubric.*
 
-**Period:**
-
-May 2024 - June 2024
+**Project period:** May 2024 - June 2024
 
 **Project team:**
 
@@ -36,4 +34,6 @@ In this project, my main tasks are:
 - Applied feature engineering and NLP techniques to extract semantic features from essays.
 - Analyzed baseline's performance and conducted experiments to improve model's accuracy.
 
-Finally, our team achieved a competitive model that improved the overall accuracy, contributed to a higher team ranking on the competition leaderboard</p>
+
+# **Conclusion **
+Finally, our team achieved a competitive model that improved the overall accuracy, contributed to a higher team ranking on the competition leaderboard

@@ -1,14 +1,14 @@
 ---
 layout: post
 title: "Stock Market Dashboard with Integrated Chatbot"
-date: 2025-03-22
+date: 2025-03-10
 category: data-science 
 ---
 
-A project that analyzes the stock market trends and integrates a chatbot to provide newcomers with insightful analysis and information about investing.
+*A project that analyzes the stock market trends and integrates a chatbot to provide newcomers with insightful analysis and information about investing.*
 
 
-**Project period:** September 2024
+**Project period:** Sep 2024 - Dec 2024
 
 **Team size:**
 
@@ -19,18 +19,18 @@ A project that analyzes the stock market trends and integrates a chatbot to prov
 - Huynh Tri Nhan
 - Nguyen Duc Manh
 
-# **Roles**
+**Roles:**
 
 - Team leading
 - Data collecting and scheduler developing
 - Dashboard building
 
-# **Tools**
+**Tools:**
 - Data Collecting: Selenium, Request, Airflow
 - Database management: PostgesQL
 - Dashboard building: Streamlit, Plotly
 
-#  Overview
+#  **Overview**
 
 This project is the final assignment for the course **"Intelligent Analysis for Data Science"** , where I have to work in team, and our task is developing an interactive dashboard to present data analysis for a chosen topic.
 
@@ -88,7 +88,7 @@ The next section of the dashboard provides an overview of the stock activity in 
 {% include image_slider.html
    id="overview-page-slider"
    images="/assets/images/stock_market/overview_page.png,
-           /assets/images/stock_market/overview_page_2.pngg"
+           /assets/images/stock_market/overview_page_2.png"
    captions="The change of the stock prices,
              Index value and top companies by financial metrics" %}
                     
@@ -120,7 +120,8 @@ And finally, the third section of our dashboard is the chatbot, which will aggre
    captions="Chatbot
              " %}
 
-Beside that, to ehance the user experience, also make our dashboard become friendlier
+
+# **Conclusion**
 
 In this project, beside my main responsiblities: building the data collecting pipeline, orchestrating it with AirFlow and developing the overview page in dashboard, I am also a team leader. In this role, I have to assign tasks for my team members based on their strength, create the project plan then trace our developing process.
 

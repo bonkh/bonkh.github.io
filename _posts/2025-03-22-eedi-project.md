@@ -5,8 +5,7 @@ date: 2025-03-22
 category: data-science 
 ---
 
-Math misconception prediction using embedding-based retrieval and LLM reranking — no model training required.
-
+*Math misconception prediction using embedding-based retrieval and LLM reranking — no model training required.*
 
 
 **Period:** Sep 2024 – Dec 2024
@@ -18,9 +17,10 @@ Math misconception prediction using embedding-based retrieval and LLM reranking 
 - Nguyen Dang Dang Khoa
 - Huynh Cao Khoi
 
-**Role:** Model developer
+**Role:** 
+- Model developing
 
-# Overview
+# **Overview**
 This project is the mid-term project for the course **Deep learning for Data Science**. Our team participated in the [Eedi - Mining Misconceptions in Mathematics](https://www.kaggle.com/competitions/eedi-mining-misconceptions-in-mathematics) competition on Kaggle. The goal is to develop an Natural Language Processing (NLP) model driven by Machine Learning (ML) that accurately predicts the common misconceptions(distractors) behind incorrect answers for multiple-choice math questions.
 
 **My contributions**
@@ -29,7 +29,7 @@ This project is the mid-term project for the course **Deep learning for Data Sci
 - Implemented a two-stage reranking pipeline to retrieve the top 25 most likely misconceptions for a given incorrect answer.
 - Integrated multiple large language models (Qwen 2.5 14B &amp; Qwen 2.5 32B) to enhance prediction performance.
 
-# Dataset
+# **Dataset**
 
 In a multiple-choice math question, we have four options (choices): one correct answer and three wrong ones (distractors). Each distractor captures a specific misconception. For example:
 
@@ -61,7 +61,7 @@ A separate misconception reference table provides detailed text descriptions for
 So wrap-up, our task is: ***Given a question–incorrect answer pair, predict the misconception that led to that wrong answer***
 
 
-# Approaches
+# **Approaches**
 We approached the problem with the two-phase pipline:
 - Phase 01: Retrieval
 - Phase 02: Re-ranking
@@ -136,7 +136,7 @@ From that, we can easily then sort the misconception base on their porbability, 
 The reason we want LLM just return one misconception, to reduce the cost of token, then, with Multiple Choice Logits Processor, we still achive the re-ranked order.
 
 
-# Some other approaches:
+# **Some other approaches**:
 
 # **Conclusion**
 Overall, this project give me greate chance to learn more about NLP tasks, and how to apply the LLM to solve a problems in Kaggle.

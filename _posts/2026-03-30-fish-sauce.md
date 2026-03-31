@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Fish sauce - my natural enemy"
-date: 2026-30-03
+date: 2026-03-30
 category: random 
 ---
 

@@ -1,10 +1,11 @@
 ---
 layout: post
 title: "2022 Data Science and Machine Learning State Analysis"
-date: 2025-03-22
+date: 2024-08-16
 category: data-science 
 ---
-A project to explored a Kaggle dataset to get insights about people who is working with data in different industries.
+
+*A project to explored a Kaggle dataset to get insights about people who is working with data in different industries.*
       
 
 **Period:** Nov 2023 - Jan 2024
@@ -46,7 +47,7 @@ Through the project, each memember pick a topic and deeply dive into it. In my s
 
 We can see some analysis result here:
 
-## The income range distribution
+## **The income range distribution**
 
 
 {% include image_slider.html
@@ -60,7 +61,7 @@ We can see some analysis result here:
             Participants' current income distribution by country,
             " %}
                  
-## Tool set for Data-related roles
+## **Tool set for Data-related roles**
 
 {% include image_slider.html
    id="icome-slider"
@@ -76,5 +77,5 @@ We can see some analysis result here:
             Statistician
             " %}
                     
-# Final thoughts               
+# **Final thoughts**               
 Finally, through this project, I have gained my first experience with data science tasks, more clearly know how data science can be applied to solve our problems and strengthen my foundation in data science.

@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "House Price Prediction"
-date: 2025-01-10
+date: 2024-08-15
 category: data-science 
 ---
-A project to discorver the real estate's state and predict the price of apartment in Ho Chi Minh City.
+*A project to discorver the real estate's state and predict the price of apartment in Ho Chi Minh City.*
 
-**Project period:** Nov 2021 – Jan 2024
+**Project period:** Nov 2023 – Jan 2024
 
 **Project team:**
 - Pham Le Tu Nhi (Team leader)

@@ -5,7 +5,10 @@ date: 2025-03-22
 category: data-science 
 ---
 
-**Project period:** Septemper 2025 - March 2026</p>
+*A project that create a benchmark to evaluate multiple language identification models*
+
+
+**Project period:** Sep 2025 - Mar 2026</p>
 
 **Team size:**
                         
