@@ -1,67 +1,73 @@
 ---
 layout: post
 title: "Language identification models evaluation"
-date: 2025-03-22
+date: 2026-03-12
 category: data-science 
 ---
 
 *A project that create a benchmark to evaluate multiple language identification models*
 
 
-**Project period:** Sep 2025 - Mar 2026</p>
+**Project period:** Sep 2025 - Feb 2026
 
-**Team size:**
+**Project team:**
                         
-- Hoan Nguyen
+- Mr.Hoan Nguyen (Superviser)
 - Huynh Cao Khoi
 
-**Role**                       
+**Role:**                       
 - Data Collecting
 - Data Preprocessing
 - Exploratory Data Analysis (EDA)
 - Model Evaluation
 - Evaluation result analysis
 
-**Tools**
-- Data Collecting : Hugging Face API
-- Data Preprocessing: Polars, sentence_splitter, pyspark,unicodedata, semhash, cleanlab,...
-- EDA: Matplotlib, Seaborn,...
-- Model Evaluation: pytorch
-- Evaluation result analysis: 
+**Tools:**
 
+- Hugging Face API, Polars, sentence_splitter, pyspark,unicodedata, semhash, cleanlab, Matplotlib, Seaborn, pytorch
 
 # **Overview**
-- This project is the work in my intership for Mr.Hoan Nguyen. In this project,I try to research and find the current state of the language indentification problem, which is an important element in many language models.
 
-In this project, I have to do these bellow main tasks:
+This project was completed in my intership under the supervision of [Mr.Hoan Nguyen](https://www.linkedin.com/in/hoannguyen88/?originalSubdomain=fr). 
 
-- Find and study about text datasets for language identification task.
-- Preprocess and combined all datasets together.
-- EDA the dataset
-- Evaluate models in [this collection](https://huggingface.co/collections/hoan/languages-identification) (combined with state-of-the-arts) in many metrics (even the runtime performance) with the combined dataset.
-- Analyze the results 
+The goal was to research and evaluate the current state of **Language Identification (LID)** 
+— the task of detecting the language from a given text. LID is a fundamental 
+component in many NLP pipelines, with many tasks such 
+as machine translation, sentiment analysis, and multilingual text classification.
+
+In this project, my main tasks were:
+
+- Study about text datasets which are suitable for language identification task.
+- Preprocess and combined multiple datasets into an evaluation benchmark.
+- Perform exploratory data analysis (EDA) on the combined dataset.
+- Evaluate models from [this collection](https://huggingface.co/collections/hoan/languages-identification) (combined with state-of-the-arts) in many metrics (even the runtime performance).
+- Analyze and sumary the evaluation results.
 
 # **Task 01: Collect text dataset**
 
 The full list of text dataset can be found in [this spreedsheet](href="https://docs.google.com/spreadsheets/d/1G12FaSMelNX87dclhm9dE3d5ZRO99B2hoFE1ufB2Zvg/edit?usp=sharing)
 
-These datasets consist of training text dataset, or benchmark dataset, which is published mostly in recent years, cover a wide range of topics and domains
+These datasets consist of training text dataset, or benchmark dataset, which is published mostly in recent years, cover a wide range of topics and domains.
 
-The collected data is in this format:
+The collected data follows this format:
 
-{% include image.html 
-   src="/assets/images/lid_evaluation/raw_data.png" 
-   caption="Raw data"
-   width="500px"
-   class="centered" %}
+| Language | Text |
+|------|------|
+| aeb_Arab   | وفي ستينيات القرن الماضي، خدم بريجنسكي مستشار لجون إف كينيدي ومبعد خدم في إدارة ليندون جونسون. |
+| ajp_Arab   | ببعض البلاد الفيدرالية ، متل الولايات المتحدة وكندا ، بفرضو ضريبة الدخل على المستوى الفيدرالي وعلى ا... |
+| bjn_Arab   | كاچوالي ڤيان ديڤلومات ناڠ باݢاوي ديلوار ناݢري, با`ارتي ڤيان موستي مامبايار ڤاجاك ڤاڠهاسيلان دي ناݢار... |
 
 
-As you can see, these dataset was consist of two main attributes:
-- **Text:** This is the main text
-- **Language:** The language code, which normally in the format language code(ISO 639-3) - language script(ISO 15924)
+Each sample contains two attributes:
+- **Language:** The language code, normally follows the format `language_script`, where:
+  - `language` is the [ISO 639-3](https://iso639-3.sil.org/) language code (e.g. `aeb` for Tunisian Arabic)
+  - `script` is the [ISO 15924](https://unicode.org/iso15924/) script code (e.g. `Arab` for Arabic script)
+
+- **Text:** The raw text sample in the corresponding language and script.
 
 # **Task 02: Merge and preprocess the combined text datasets**
-- After downloading the dataset from multiple sources, I performed some simple preprocessing steps in each dataset.
+
+After downloading the dataset from multiple sources, I applied a simple preprocessing pipeline to each dataset before merging them together.
 
 {% include image.html 
    src="/assets/images/lid_evaluation/raw_data_process.png" 
@@ -69,9 +75,11 @@ As you can see, these dataset was consist of two main attributes:
    width="500px"
    class="centered" %}
 
-In the handling long text step, I used [sentence-split](https://pypi.org/project/iges-sentence-splitter/) package to split the text into sentences more accurately.
+To handling long text, I used the [sentence-splitter package](https://pypi.org/project/iges-sentence-splitter/) to accurately split long texts into sentences, ensuring each sample has a manageable and consistent length for downstream evaluation.
 
-After that, I combined all the sources into one dataset, using this process:
+
+After preprocessing all sources individually, I merged them all into a single unified 
+dataset using the following pipeline:
 
 {% include image.html 
    src="/assets/images/lid_evaluation/combined_data_process.png" 
@@ -80,11 +88,21 @@ After that, I combined all the sources into one dataset, using this process:
    class="centered" %}
 
 
-With the combined dataset, I performed these main steps to clean it:
+With the combined dataset, I applied these cleaning steps:
 
-**Step 01: Clean the programming language pattern**
+### **Step 01: Clean the programming language pattern**
 
 Programming language is not the natural language, I considered it as noise in a LID dataset
+
+
+text |source |lang|code_ratio|
+| _________________________________________________________________________________|old_news  |fra |0.9959514 |
+|____________________________________________________________________________________ _____________________________________________________________________________________________________________________ ______________________________________________________________________________________|old_news  |fra |0.9930796 |
+|__________________________________________________________________________________________________________ ___________________________________________________________________________________________|old_news  |fra |0.9949495 |
+|____________________________________________________________________|toxic_text|eng |1.0       |
+|// ************************************************************************* //|toxic_text|eng |0.9746835 |
+|+---------------------------------------------------------------------------+|toxic_text|eng |1.0       |
+|<_>2.*2 <_>2 <_+>4 <_>2.*3 <_>4 <6> <6+> <_+>2. <_+>4 <6> <6+> <_> <_+>4. <6>8 <_>4 <4> <3> <_>2. <6>8. <6+>16 <_>4 <6+>8 <5> <_+>2 <_>8 <6> <_>4 <4> <3> <_+>2. <_!> <_> <_>2 <6>4 <6>2. <_>2.*2 <_+>2. <6>2 <6+>4 <_>2. <_>4 <6> <6+> <_>2. <_+> <_>2.*2 <_>2 <6>4 <_+>2 <6>4 <_>2 <6+>4 <_+>2. <_>4 <7> <5> <_+>2. <_+> <_+> <_+>4 <6>2 <_>4 <6>2 <4>4 <3>2 <_+>2. <_> <_+> <_>2. <5>4 <6> <_+> <6>4 <4 6>2 <_>2. <2 4>4 <5!>2 <_> <_+>4 <6> <6+>2 <_+>2. <_>2 <6>4 <_>2.*3 <_>2 <4 6>8 <6+> <_>2. <5>8 <6> <_> <6> <6+>4 <_>2. <_+>2 <6>8 <6+> <_>2 <4+ 6>4 %% page 254 <6>8 <6+> <6>4 <4>8 <3> <_>2. <_>4 <6> <4> <3+> <_+>2. <_>4 <6> <5!> <_>2. <_>4 <6>8 <5> <5!>4 <_>4. <6>8 <6>2 <_>2. <_>2 <6+>4 <_>2 <6>4 <_>2 <7>8 <6> <_+>2. <_>2 <6>4 <_>2 <6>8 <_+> <_>2. <_>2 <4 6>8 <6> <6>4 <6>2 <_>4 <6> <5!> <4>2. <_> <_>4 <5!>2 <_> <4 6>4 <_+>4 <6>2 <7>4 <6> <_+> <_> <_+>2 <6>2. <_+>2 <6>8 <6+> <_>2. <_>4 <6>2 <7>4 <6> <_> <_>2. <6> <_>2 <5!>4 <_>2 <4 6>4 <_+> <6>2 <7>4 <6> <_+> <_> <_+>2 <_>1 <_>2 <6> <_> <4>4 <3> <6>1 <_+>2 <6> |toxic_text|fra |0.520751  |
 
 I simply used [re](https://docs.python.org/3/library/re.htmlz) package to find the programming language pattern inside the text. The text containing mostly programming language pattern will be removed. In others, I cleand all the possible patterns.
 
@@ -97,7 +115,13 @@ I simply used [re](https://docs.python.org/3/library/re.htmlz) package to find t
 
 **Step 02: Detect abnormal symbols in texts:**
 
-Symbols such as #, ^, ~, -, and non-Unicode characters negatively affect text quality and do not contribute useful information for language identification.
+Symbols such as #, ^, ~, -, and non-Unicode characters negatively affect text quality and do not contribute useful information for language identification. However, there are multiple samples mainly contain these symbols:
+
+| Language | Text |
+|------|------|
+| est   |  "< 2A.4.1.4 type = "" S "" input = "" S "" Decision = N >" |
+| est   |  ( slide No. 42 ) ¡¡£¹ºÐ¤Î»Ò¶¡¤Ç¤¹¤¬¡¢ÇòÆâ¾ã¤¬½Ð¤Æ¤ª¤ê¤Þ¤¹¡£¤³¤ÎÊý¤Ï²¿¥«·î¤«Á°¤Ë¤ä¤Ï¤ê¥¹¥Æ¥í¥¤¥É¤¬... |
+
 
 To detect the abnormal symbols, I used [unicodedata](https://docs.python.org/es/3.13/library/unicodedata.html) package to detect the character which is not ịn types: letter, mark, number
 
@@ -109,7 +133,14 @@ To detect the abnormal symbols, I used [unicodedata](https://docs.python.org/es/
 
 **Step 03: Clean the text with high ratio of number**
 
-Texts consisting mostly numbers, can be math calculation, equation, or numeric tables, they should also be removed.
+Texts consisting mostly numbers, can be math calculation, equation, or numeric tables, they should also be removed. Some examples in the current dataset:
+
+| Language | Text |
+|------|------|
+| est   |  79600000-0 kuni 79635000-4 (v.a 79611000-0, 79632000-3, 79633000-0), ja 98500000-8 kuni 98514000-9 |
+| deu   |   5 6 12 14 15 16 17 19 20 21 25 26 32 34 35 36 37 39 2 5 7 10 12 13 14 18 19 20 22 25 27 30 32 ... |
+| deu|2755 2756 2757 2758 2759 2760 2761 2762 2763 2764 2765 2766 2767 2768 2769 2770 2771 2772 2773 27...|
+
 
 {% include image.html 
    src="/assets/images/lid_evaluation/digit_process.png" 
@@ -120,7 +151,19 @@ Texts consisting mostly numbers, can be math calculation, equation, or numeric t
 
 **Step 04: Select mostly character texts**
 
-After multiple cleaning steps, some texts may become empty or just contain very little information left, now we need to keep only texts that contain a sufficient proportion of
+After multiple cleaning steps, some texts may become empty or just contain very little information left. There are lots of samples which is two short:
+
+| text |    source|lang| text_clean|
+|------|------|------|------|
+|  "< 5.1.1 type = "" S "" maxlength = "" 255 "" input = "" M "" decision = "" N "" > Kodukabjalised"|   openlid| est|     Kodukabjalised|
+| peatati alates _ _ / _ _ / _ _ _ _ kuni _ _ / _ _ / _ _ _ _|   openlid| est|peatati alates kuni|
+|== poopoos == poopoos!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!...|toxic_text| est|    poopoos poopoos|
+|<8, -S5z Ä- schätzbarsten Publikum bekannt zu machen. daß' er in die Stelle drShierin Wien , in d...|toxic_text| deu|                  .|
+|                               "< 3.1.11 type = "" N "" input = "" M "" SME "" > 5, i retsakten, og"|   openlid| dan| 5, i retsakten, og|
+
+
+
+Now we need to keep only texts that contain a sufficient proportion of
 informative characters.
 
 {% include image.html 
@@ -159,14 +202,14 @@ In Cleanlab, there are two important elements:
 
 
 After trying with multiple setting of embedder and classifier, I have these main settings. The detailed implementation can be found in [this notebook](https://www.kaggle.com/code/caokhoihuynh/check-the-data-issue-cleanlab)
-- Embeder: FastText - Classifier: Logistic regression, API:cleanlab.classification.CleanLearning </li>
-                        <li>Embeder: Transformer + FastText - Classifier: XGB classifier, API:
-                            cleanlab.classification.CleanLearning </li>
-                        <li>Embeder: FastText - Classifier: Logistic regression, API: cleanlab.filter.find_label_issues
-                        </li>
-                        <li>Embeder: Transformer - Classifier: Logistic regression, API:
-                            cleanlab.filter.find_label_issues </li>
-                    </ul>
+| Embeder | Classifier |  API|
+|------|------|------|
+|FastText | Logistic regression | cleanlab.classification.CleanLearning|
+|Transformer + FastText| XGB classifier| cleanlab.classification.CleanLearning|
+| FastText| Logistic regression | cleanlab.filter.find_label_issues|
+| Transformer | Logistic regression| cleanlab.filter.find_label_issues |
+
+
 Different settings will result in a different label-cleaned versions of dataset. From that, I ensembled all of them, using a simple strategy that a text, which will have a highly confident about the label quality, if it appear in all versions. The detailed implementation can be found in [this notebook](https://www.kaggle.com/code/caokhoihuynh/ensemble-data-02).
 
 After all of these steps, I have a cleaned version of the dataset, containing about 1,5 million samples. And it still is not completely clean. 🥲🥲🥲

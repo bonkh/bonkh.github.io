@@ -10,7 +10,7 @@ category: data-science
 
 **Project period:** Sep 2024 - Dec 2024
 
-**Team size:**
+**Project team:**
 
 - Huynh Cao Khoi (Team leader)
 - Nguyen Van Quang Hung
