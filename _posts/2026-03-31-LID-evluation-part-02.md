@@ -5,7 +5,7 @@ date: 2026-03-31
 category: data-science 
 ---
 
-*Part 02 of the language identification models evaluation - replicate the WorldLamma detect model*
+*Learning about the `WorldLamma Detect` model and attempt to replicate its architecture by experimenting with alternative embedding backbones to improve performance*
 
 
 **Project period:** Sep 2025 - Mar 2026
