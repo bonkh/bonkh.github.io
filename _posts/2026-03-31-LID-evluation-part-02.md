@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Language identification models evaluation - part 02 - replicate the Wordllama detect"
+title: "Language Identification Model Evaluation - Part 02 - Replicate WordLlama Detect Model"
 date: 2026-03-31
 category: data-science 
 ---
