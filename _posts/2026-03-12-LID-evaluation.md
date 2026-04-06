@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Language identification models evaluation"
+title: "Language Identification Model Evaluation – Part 01"
 date: 2026-03-12
 category: data-science 
 ---
@@ -24,7 +24,7 @@ category: data-science
 
 **Tools:**
 
-- Hugging Face API, Polars, sentence_splitter, pyspark,unicodedata, semhash, cleanlab, Matplotlib, Seaborn, pytorch
+Hugging Face API, Polars, sentence_splitter, pyspark,unicodedata, semhash, cleanlab, Matplotlib, Seaborn, pytorch
 
 # **Overview**
 
@@ -32,8 +32,7 @@ This project was completed in my intership under the supervision of [Mr.Hoan Ngu
 
 The goal was to research and evaluate the current state of **Language Identification (LID)** 
 — the task of detecting the language from a given text. LID is a fundamental 
-component in many NLP pipelines, with many tasks such 
-as machine translation, sentiment analysis, and multilingual text classification.
+component in many NLP pipelines, with many tasks such as machine translation, sentiment analysis, and multilingual text classification.
 
 In this project, my main tasks were:
 
@@ -43,11 +42,12 @@ In this project, my main tasks were:
 - Evaluate models from [this collection](https://huggingface.co/collections/hoan/languages-identification) (combined with state-of-the-arts) in many metrics (even the runtime performance).
 - Analyze and sumary the evaluation results.
 
-# **Task 01: Collect text dataset**
+# **Task 01: Collect text datasets**
 
-The full list of text dataset can be found in [this spreedsheet](href="https://docs.google.com/spreadsheets/d/1G12FaSMelNX87dclhm9dE3d5ZRO99B2hoFE1ufB2Zvg/edit?usp=sharing)
+I surveyed a broad range of multilingual datasets, focus on those published mostly in recent years. The datasets include **LID benchmarks** , or datasets from other multilingual NLP tasks such as machine translation, sentiment analysis ,...
 
-These datasets consist of training text dataset, or benchmark dataset, which is published mostly in recent years, cover a wide range of topics and domains.
+Finally, I have a collection ~20 datasets, covering a wide range of topics and domains. The full list of these datasets and their information can be found in [this spreedsheet](href="https://docs.google.com/spreadsheets/d/1G12FaSMelNX87dclhm9dE3d5ZRO99B2hoFE1ufB2Zvg/edit?usp=sharing)
+
 
 The collected data follows this format:
 
@@ -65,9 +65,12 @@ Each sample contains two attributes:
 
 - **Text:** The raw text sample in the corresponding language and script.
 
+---
+
 # **Task 02: Merge and preprocess the combined text datasets**
 
-After downloading the dataset from multiple sources, I applied a simple preprocessing pipeline to each dataset before merging them together.
+
+While downloading the dataset from multiple sources, I applied a simple preprocessing pipeline to each dataset before merging them together.
 
 {% include image.html 
    src="/assets/images/lid_evaluation/raw_data_process.png" 
@@ -76,6 +79,8 @@ After downloading the dataset from multiple sources, I applied a simple preproce
    class="centered" %}
 
 To handling long text, I used the [sentence-splitter package](https://pypi.org/project/iges-sentence-splitter/) to accurately split long texts into sentences, ensuring each sample has a manageable and consistent length for downstream evaluation.
+
+Finally, I stored all the cleaned dataset in [this Kaggle collection][https://www.kaggle.com/work/collections/17790420]
 
 
 After preprocessing all sources individually, I merged them all into a single unified 
@@ -92,17 +97,18 @@ With the combined dataset, I applied these cleaning steps:
 
 ### **Step 01: Clean the programming language pattern**
 
-Programming language is not the natural language, I considered it as noise in a LID dataset
+Programming language is not the natural language, I considered it as noise in a LID dataset. For example, I found some samples, which have the symbols or pattern which is more look like programming language in the combined dataset
 
 
-text |source |lang|code_ratio|
-| _________________________________________________________________________________|old_news  |fra |0.9959514 |
-|____________________________________________________________________________________ _____________________________________________________________________________________________________________________ ______________________________________________________________________________________|old_news  |fra |0.9930796 |
+|text |source |lang|code_ratio|
+|_________________________________________________________________________________|old_news  |fra |0.9959514 |
+|____________________________________________________________________________________
+____________________________________________________________________________________________________________________ ______________________________________________________________________________________|old_news  |fra |0.9930796 |
 |__________________________________________________________________________________________________________ ___________________________________________________________________________________________|old_news  |fra |0.9949495 |
 |____________________________________________________________________|toxic_text|eng |1.0       |
 |// ************************************************************************* //|toxic_text|eng |0.9746835 |
 |+---------------------------------------------------------------------------+|toxic_text|eng |1.0       |
-|<_>2.*2 <_>2 <_+>4 <_>2.*3 <_>4 <6> <6+> <_+>2. <_+>4 <6> <6+> <_> <_+>4. <6>8 <_>4 <4> <3> <_>2. <6>8. <6+>16 <_>4 <6+>8 <5> <_+>2 <_>8 <6> <_>4 <4> <3> <_+>2. <_!> <_> <_>2 <6>4 <6>2. <_>2.*2 <_+>2. <6>2 <6+>4 <_>2. <_>4 <6> <6+> <_>2. <_+> <_>2.*2 <_>2 <6>4 <_+>2 <6>4 <_>2 <6+>4 <_+>2. <_>4 <7> <5> <_+>2. <_+> <_+> <_+>4 <6>2 <_>4 <6>2 <4>4 <3>2 <_+>2. <_> <_+> <_>2. <5>4 <6> <_+> <6>4 <4 6>2 <_>2. <2 4>4 <5!>2 <_> <_+>4 <6> <6+>2 <_+>2. <_>2 <6>4 <_>2.*3 <_>2 <4 6>8 <6+> <_>2. <5>8 <6> <_> <6> <6+>4 <_>2. <_+>2 <6>8 <6+> <_>2 <4+ 6>4 %% page 254 <6>8 <6+> <6>4 <4>8 <3> <_>2. <_>4 <6> <4> <3+> <_+>2. <_>4 <6> <5!> <_>2. <_>4 <6>8 <5> <5!>4 <_>4. <6>8 <6>2 <_>2. <_>2 <6+>4 <_>2 <6>4 <_>2 <7>8 <6> <_+>2. <_>2 <6>4 <_>2 <6>8 <_+> <_>2. <_>2 <4 6>8 <6> <6>4 <6>2 <_>4 <6> <5!> <4>2. <_> <_>4 <5!>2 <_> <4 6>4 <_+>4 <6>2 <7>4 <6> <_+> <_> <_+>2 <6>2. <_+>2 <6>8 <6+> <_>2. <_>4 <6>2 <7>4 <6> <_> <_>2. <6> <_>2 <5!>4 <_>2 <4 6>4 <_+> <6>2 <7>4 <6> <_+> <_> <_+>2 <_>1 <_>2 <6> <_> <4>4 <3> <6>1 <_+>2 <6> |toxic_text|fra |0.520751  |
+|<_>2.*2 <_>2 <_+>4 <_>2.*3 <_>4 <6> <6+> <_+>2. <_+>4 <6> <6+> <_> <_+>4. <6>8 <_>4 <4> <3> <_>2. <6>8. <6+>16 <_>4 <6+>8 <5> <_+>2 <_>8 <6> <_>4 <4> <3> <_+>2. <_!> <_> <_>2 <6>4...|toxic_text|fra |0.520751  |
 
 I simply used [re](https://docs.python.org/3/library/re.htmlz) package to find the programming language pattern inside the text. The text containing mostly programming language pattern will be removed. In others, I cleand all the possible patterns.
 
@@ -112,10 +118,13 @@ I simply used [re](https://docs.python.org/3/library/re.htmlz) package to find t
    width="500px"
    class="centered" %}
 
-
 **Step 02: Detect abnormal symbols in texts:**
 
-Symbols such as #, ^, ~, -, and non-Unicode characters negatively affect text quality and do not contribute useful information for language identification. However, there are multiple samples mainly contain these symbols:
+Certain symbols — such as `#`, `^`, `~`, `-`, and non-Unicode characters — do not 
+carry meaningful linguistic information and can negatively impact the quality of the 
+dataset. 
+
+However, there are multiple samples mainly contain these symbols, making them uninformative or even harmful for the language identification task.
 
 | Language | Text |
 |------|------|
@@ -123,7 +132,7 @@ Symbols such as #, ^, ~, -, and non-Unicode characters negatively affect text qu
 | est   |  ( slide No. 42 ) ¡¡£¹ºÐ¤Î»Ò¶¡¤Ç¤¹¤¬¡¢ÇòÆâ¾ã¤¬½Ð¤Æ¤ª¤ê¤Þ¤¹¡£¤³¤ÎÊý¤Ï²¿¥«·î¤«Á°¤Ë¤ä¤Ï¤ê¥¹¥Æ¥í¥¤¥É¤¬... |
 
 
-To detect the abnormal symbols, I used [unicodedata](https://docs.python.org/es/3.13/library/unicodedata.html) package to detect the character which is not ịn types: letter, mark, number
+To detect the abnormal symbols, I used [unicodedata](https://docs.python.org/es/3.13/library/unicodedata.html) package to detect the character which is not ịn types: letter, mark, number.
 
 {% include image.html 
    src="/assets/images/lid_evaluation/symbols_removal.png" 
@@ -151,14 +160,13 @@ Texts consisting mostly numbers, can be math calculation, equation, or numeric t
 
 **Step 04: Select mostly character texts**
 
-After multiple cleaning steps, some texts may become empty or just contain very little information left. There are lots of samples which is two short:
+After multiple cleaning steps, some texts may become empty or just contain very little information left. There are lots of samples which is too short:
 
-| text |    source|lang| text_clean|
+| text |  source|lang| text_clean|
 |------|------|------|------|
 |  "< 5.1.1 type = "" S "" maxlength = "" 255 "" input = "" M "" decision = "" N "" > Kodukabjalised"|   openlid| est|     Kodukabjalised|
 | peatati alates _ _ / _ _ / _ _ _ _ kuni _ _ / _ _ / _ _ _ _|   openlid| est|peatati alates kuni|
 |== poopoos == poopoos!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!...|toxic_text| est|    poopoos poopoos|
-|<8, -S5z Ä- schätzbarsten Publikum bekannt zu machen. daß' er in die Stelle drShierin Wien , in d...|toxic_text| deu|                  .|
 |                               "< 3.1.11 type = "" N "" input = "" M "" SME "" > 5, i retsakten, og"|   openlid| dan| 5, i retsakten, og|
 
 
@@ -172,7 +180,7 @@ informative characters.
    width="500px"
    class="centered" %}
 
-The final dataset is stored in parquet files. The storage is significantly reduced compared with the tsv files in the previous step.
+The final dataset is stored in parquet files. The storage is significantly reduced compared with the tsv files in the previous step. The current dataset can be see [here](https://www.kaggle.com/datasets/caokhoihuynh/multilingual-data-cleaned-parquet/data)
 
 **Subsampling the data using SemHash and Cleanlab**
 
@@ -197,39 +205,43 @@ To solve this problem, I used [Cleanlab](https://github.com/cleanlab/cleanlab) a
 
 In Cleanlab, there are two important elements:
 
-- The embeder: Create the embedding vectors of the given text
-- Classifier: Trained from the data, to create the predicted language probabilities for a given text
-
+- The embeder: Create the embedding vectors of the given text.
+- Classifier: Trained from the data, to create the predicted language probabilities for a given text.
 
 After trying with multiple setting of embedder and classifier, I have these main settings. The detailed implementation can be found in [this notebook](https://www.kaggle.com/code/caokhoihuynh/check-the-data-issue-cleanlab)
-| Embeder | Classifier |  API|
-|------|------|------|
-|FastText | Logistic regression | cleanlab.classification.CleanLearning|
-|Transformer + FastText| XGB classifier| cleanlab.classification.CleanLearning|
-| FastText| Logistic regression | cleanlab.filter.find_label_issues|
-| Transformer | Logistic regression| cleanlab.filter.find_label_issues |
+
+| Embedder | Classifier | API |
+|---|---|---|
+| FastText | Logistic Regression | `cleanlab.classification.CleanLearning` |
+| Transformer + FastText | XGB Classifier | `cleanlab.classification.CleanLearning` |
+| FastText | Logistic Regression | `cleanlab.filter.find_label_issues` |
+| Transformer | Logistic Regression | `cleanlab.filter.find_label_issues` |
 
 
 Different settings will result in a different label-cleaned versions of dataset. From that, I ensembled all of them, using a simple strategy that a text, which will have a highly confident about the label quality, if it appear in all versions. The detailed implementation can be found in [this notebook](https://www.kaggle.com/code/caokhoihuynh/ensemble-data-02).
 
 After all of these steps, I have a cleaned version of the dataset, containing about 1,5 million samples. And it still is not completely clean. 🥲🥲🥲
 
+---
 
 # **Task 03: Doing EDA for the collected dataset**
 
-The detailed analysis on the dataset can be found in [this notebook](https://www.kaggle.com/code/caokhoihuynh/eda-multilingual-dataset)
+In this section, I will discover the dataset. The detailed analysis on the dataset can be found in [this notebook](https://www.kaggle.com/code/caokhoihuynh/eda-multilingual-dataset)
 
-Some key features about the dataset can be listed:
+Some key features about the dataset are:
 
 {% include image_slider.html
    id="eda-slider"
-   images="/assets/images/lid_evluation/source_similarity.png,
-           /assets/images/lid_evluation/length_distribution.png,
-           /assets/images/lid_evluation/word_count_distribution.png"
+   images="/assets/images/lid_evaluation/source_similarity.png,
+            /assets/images/lid_evaluation/source_distribution.png,
+           /assets/images/lid_evaluation/length_distribution.png,
+           /assets/images/lid_evaluation/word_count_distribution.png"
    captions="Source similarity in Jaccard distance,
+            Source distribution,
              Text length distribution,
              Word count distribution" %}
 
+---
 # **Task 04: Evaluate the cleaned dataset with models**
 
 Here is the list of model I evaluated, also consider the supporting language list for all these models:
@@ -306,8 +318,8 @@ deployment requirements.
 
 {% include image_slider.html
    id="eda-slider"
-   images="/assets/images/lid_evluation/RAM_usage.png,
-           /assets/images/lid_evluation/VRAM_usage.png"
+   images="/assets/images/lid_evaluation/RAM_usage.png,
+           /assets/images/lid_evaluation/VRAM_usage.png"
    captions="RAM usage for CPU evaluation,
              VRAM usage for GPU evaluation" %}
 
@@ -318,8 +330,8 @@ In more detail, I used the pareto plot to show the relation between memory usage
                    
 {% include image_slider.html
    id="eda-slider"
-   images="/assets/images/lid_evluation/scen_01_ram_vs_metrics.png,
-           /assets/images/lid_evluation/scen_02_ram_vs_metrics.png"
+   images="/assets/images/lid_evaluation/scen_01_ram_vs_metrics.png,
+           /assets/images/lid_evaluation/scen_02_ram_vs_metrics.png"
    captions="Pareto plot for RAM usage vs metrics in scenario 01,
              Pareto plot for RAM usage vs metrics in scenario 02" %}
 
@@ -337,8 +349,8 @@ accurate language identification module.
 
 {% include image_slider.html
    id="eda-slider"
-   images="/assets/images/lid_evluation/scen_01_thoughput_vs_metrics.png,
-           /assets/images/lid_evluation/scen_02_thoughput_vs_metrics.png"
+   images="/assets/images/lid_evaluation/scen_01_thoughput_vs_metrics.png,
+           /assets/images/lid_evaluation/scen_02_thoughput_vs_metrics.png"
    captions="Pareto plot for RAM usage vs metrics in scenario 01,
              Pareto plot for RAM usage vs metrics in scenario 02" %}
 
@@ -356,6 +368,5 @@ memory usage, and throughput, making it a strong candidate for a wide range of p
 applications.
 
 ## Conclusion
-
 Through this project, I gained valuable knowledge about current language identification 
-methods and hands-on experience working in the NLP field.
+methods and hands-on experience working in the NLP field. In next part, we will explore about a state-of-the-art model: `WorldLlama Detect`
