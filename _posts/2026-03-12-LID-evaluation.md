@@ -28,7 +28,7 @@ Hugging Face API, Polars, sentence_splitter, pyspark,unicodedata, semhash, clean
 
 # **Overview**
 
-This project was completed in my intership under the supervision of [Mr.Hoan Nguyen](https://www.linkedin.com/in/hoannguyen88/?originalSubdomain=fr). 
+This project was completed in my internship under the supervision of [Mr.Hoan Nguyen](https://www.linkedin.com/in/hoannguyen88/?originalSubdomain=fr). 
 
 The goal was to research and evaluate the current state of **Language Identification (LID)** 
 — the task of detecting the language from a given text. LID is a fundamental 
@@ -255,14 +255,14 @@ Here is the list of model I evaluated, also consider the supporting language lis
 - [epfl-nlp/ConLID](https://github.com/epfl-nlp/ConLID): 1869 possible labels
 - [cis-lmu/glotlid](https://huggingface.co/cis-lmu/glotlid): 1873 possible labels
  
-We can see the **papluca** model only supports a limited set of languages (20 languages), 
-while **conlid** and **glotlid** can support more than 1800 languages. Other models support 
+We can see the `papluca` model only supports a limited set of languages (20 languages), 
+while `conlid` and `glotlid` can support more than 1800 languages. Other models support 
 around 100–200 languages.
 
 To ensure a fair evaluation between models, we consider three scenarios:
 
-- **Scenario 1:** Evaluate all models, except papluca, on an 83-language dataset (the overlap of supported languages across all other models).
-- **Scenario 2:** Evaluate all models, including papluca, on a 17-language dataset.
+- **Scenario 1:** Evaluate all models, except `papluca`, on an 83-language dataset (the overlap of supported languages across all other models).
+- **Scenario 2:** Evaluate all models, including `papluca`, on a 17-language dataset.
 - **Scenario 3:** Evaluate only conlid and glotlid on a 1810-language dataset.
 
 For each scenario, I evaluated each language separately, recording:
