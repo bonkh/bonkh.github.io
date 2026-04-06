@@ -279,8 +279,8 @@ model1 logits      model2 logits
 
 | Pair | Num Languages | Accuracy | F1 Macro | Metric per Base Model |
 |---|---|---|---|---|
-| gemma3_27b + gemma_300m | 148 | 0.9307 | 0.9303 | **gemma3_27b:** Acc: 0.9147, F1: 0.9149 <br> **gemma_300m:** Acc: 0.9087, F1: 0.9078 |
-| mala_500 + gemma_300m | 131 | 0.9584 | 0.9592 | **mala_500:** Acc: 0.9372, F1: 0.9394 <br> **gemma_300m:** Acc: 0.9075, F1: 0.9071 |
+| [gemma3_27b + gemma_300m](https://www.kaggle.com/code/caokhoihuynh/wordllama-minimum-training-process?scriptVersionId=301328153) | 148 | 0.9307 | 0.9303 | **gemma3_27b:** Acc: 0.9147, F1: 0.9149 <br> **gemma_300m:** Acc: 0.9087, F1: 0.9078 |
+| [mala_500 + gemma_300m](https://www.kaggle.com/code/caokhoihuynh/wordllama-minimum-training-process?scriptVersionId=301364903) | 131 | 0.9584 | 0.9592 | **mala_500:** Acc: 0.9372, F1: 0.9394 <br> **gemma_300m:** Acc: 0.9075, F1: 0.9071 |
 
 
 ## **Ensemble strategy 02: Weighted averaging**
@@ -328,7 +328,7 @@ model1 logits      model2 logits
 
 | Pair | Num Languages | Accuracy | F1 Macro | Metric per Base Model |
 |---|---|---|---|---|
-| gemma3_27b + gemma_300m | 148 | 0.9313 | 0.9313 | **gemma3_27b:** Acc: 0.9147, F1: 0.9149 <br> **gemma_300m:** Acc: 0.9087, F1: 0.9078 |
+| [gemma3_27b + gemma_300m](https://www.kaggle.com/code/caokhoihuynh/wordllama-minimum-training-process?scriptVersionId=301383817) | 148 | 0.9313 | 0.9313 | **gemma3_27b:** Acc: 0.9147, F1: 0.9149 <br> **gemma_300m:** Acc: 0.9087, F1: 0.9078 |
 
 
 From the results, we can see that **ensemble methods** can boost the model's performance significantly. The tradeoff, however, is a more complex training pipeline, we need to train two separate base models independently before combining them in the meta/weighted fusion stage.
@@ -374,7 +374,7 @@ logits_0  logits_1  logits_2  logits_3    logits_4
 
 | Model | Accuracy | F1 Macro | F1 Weighted |
 |---|---|---|---|
-| gemma3_27b | 0.2734 | 0.2521 | 0.2503 |
+| [gemma3_27b](https://www.kaggle.com/code/caokhoihuynh/wordllama-minimum-training-process?scriptVersionId=301782572) | 0.2734 | 0.2521 | 0.2503 |
 | gemma3_27b @ dim=128 | 0.2050 | 0.1902 | 0.1918 |
 | gemma3_27b @ dim=64 | 0.1650 | 0.1481 | 0.1492 |
 
