@@ -5,22 +5,29 @@ date: 2026-03-30
 category: random 
 ---
 
-The love or hate is not extreme, but by situation.
-
-"I cannot eat fish sauce" - That is the thing I will talk with someone in a meal.
-
-It sound weird, right? When you live in Vietnam, using fish sauce in your dish are obivious. We use it for seasoning, combined it with others herbs or ingredient to create a new sauce, or just use it raw. In every meal, my dad always use raw fish sauce with chili.
-
-But say again, the correct thing is : "I cannot eat some kinds of fish sauce"
-
-I will explain it:
-
-My problem of me with fish sauce is its smell, I found it is unpleasant with me. That's why I cannot eat raw fish sauce, or any raw sauce like shrimpe sauce, etc
-
-But when we cook it, use it for the seasoning, it smell is not anoyme anymore, it create a greate flavor in the dish. Fish sauce, salt and sugar is the only thing I do for seasoning.
+`We don't exactly love or hate something, it really depends on situation.`
 
 
-So How about other dish which use fish sauce as toping. It is depend my eating habit, I will list some of them:
-- Com Tam: I will not use fish sauce in Com Tam, it still have unpleasant smell, and as It is not 
-- Bun Thit Nuong: The sweet fish sauce in Com Tam and Bun Thit Nuong are the same, but with Bun Thit Nuong
-- Banh Cuon:
+“I can’t eat fish sauce.”
+That’s something I often say when I’m having a meal with someone
+
+It sounds strange, right? Especially when you live in Vietnam, where fish sauce is everywhere. We use it for seasoning, mix it with herbs and other ingredients to create dipping sauces, or even eat it raw. In my family, my dad always has a small bowl of raw fish sauce with chili at every meal.
+
+But to be more accurate, what I should say is:
+“I can’t eat some kinds of fish sauce.”
+
+Let me explain.
+
+My main issue with fish sauce is the smell. I find it unpleasant, especially when it’s raw. That’s why I avoid raw fish sauce or similar things like shrimp paste.
+
+However, when fish sauce is cooked and used as a seasoning, it completely changes. The strong smell disappears, and it adds a rich, savory flavor to the dish. Honestly, fish sauce, salt, and sugar are usually all I need for seasoning.
+
+So what about dishes where fish sauce is used as a dipping sauce or topping? That really depends on the dish:
+
+Com Tam (broken rice): I usually skip the fish sauce here. The smell still feels too strong for me, and I don’t really miss it.
+Bun Thit Nuong (grilled pork vermicelli): Interestingly, I can eat the sweet fish sauce in this dish. Even though it’s similar to the one in Com Tam, the herbs help balance the smell, and the overall combination works for me.
+Banh Cuon (steamed rice rolls): This one is easier too. The fried shallots add aroma and texture, which helps mask the smell and makes it more enjoyable.
+
+In the end, I realized that I don’t completely hate fish sauce—I just have certain limits. And honestly, it’s not as bad as I once thought.
+
+But habits are powerful. They keep us in our comfort zone, even when we know we could try something different. 

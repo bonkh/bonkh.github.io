@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Language Identification Model Evaluation – Part 01"
+title: "Language Identification Model Evaluation – part 01"
 date: 2026-03-12
 category: data-science 
 ---
